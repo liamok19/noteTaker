@@ -16,13 +16,22 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, 'public/notes.html'))
 );
 
-app.get('*', (req, res) =>
+app.get('*', (req, res) => {
     res.send(
     `Have another crack at the note taking <a href="http://localhost:${PORT}/index">http://localhost:${PORT}/index</a>`
-    )
-);
+    );
+      // Show the user agent information in the terminal
+    console.info(req.rawHeaders);
 
-app.get('/api/terms', (req, res) => res.json(termData));
+    // Log our request to the terminal
+    console.info(`${req.method} request received`);
+
+});
+
+app.get('/api/db', (req, res) => res.json(dbData));
+
+app.get('/api/db:db', (req, res) => res.json(dbData));
+
 
 
 app.listen(PORT, () =>
