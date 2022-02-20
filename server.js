@@ -4,7 +4,7 @@ const path = require('path');
 const termData = require('./db/db.json');
 
 const app = express();
-const PORT = 3005;
+const PORT = 3001;
 
 app.use(express.static('public'));
 
@@ -18,7 +18,7 @@ app.get('/notes', (req, res) =>
 
 app.get('*', (req, res) =>
     res.send(
-    `Have another crack at the note taking <a href="http://localhost:${PORT}/api/index">http://localhost:${PORT}/api/index</a>`
+    `Have another crack at the note taking <a href="http://localhost:${PORT}/index">http://localhost:${PORT}/index</a>`
     )
 );
 
