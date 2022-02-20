@@ -32,7 +32,7 @@ app.get('/api/db', (req, res) => res.json(dbData));
 
 app.get('/api/db:db', (req, res) => res.json(dbData));
 
-app.post('/api/reviews', (req, res) => {
+app.post('/api/notes', (req, res) => {
     // Let the client know that their POST request was received
     res.json(`${req.method} request received`);
     
