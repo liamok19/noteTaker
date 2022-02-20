@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const termData = require('./db/db.json');
 
 //create an epxress server
 const app = express();
