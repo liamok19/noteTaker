@@ -4,7 +4,7 @@ const path = require('path');
 const termData = require('./db/db.json');
 
 const app = express();
-const PORT = 3001;
+const PORT = 3005;
 
 app.use(express.static('public'));
 
@@ -18,7 +18,7 @@ app.get('/notes', (req, res) =>
 
 app.get('*', (req, res) =>
     res.send(
-    `Make a GET request using Insomnia to <a href="http://localhost:${PORT}/api/terms">http://localhost:${PORT}/api/terms</a>`
+    `Have another crack at the note taking <a href="http://localhost:${PORT}/api/index">http://localhost:${PORT}/api/index</a>`
     )
 );
 
