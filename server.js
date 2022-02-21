@@ -1,8 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const termData = require('./db/db.json');
-const uuid4 = require('uuid');
+var termData = require('./db/db.json');
+const {v4: uuid4} = require('uuid');
 
 //create an epxress server
 const app = express();
@@ -52,42 +52,59 @@ app.get('*', (req, res) => {
 
 });
 
-//Posting new note 
+// Posting new note 
 app.post('/api/notes', (req, res) => {
-
-    // Show the user agent information in the terminal
-    console.info(req.rawHeaders);
+    // // Show the user agent information in the terminal
+    // console.info(req.rawHeaders);
     
     // // Log request to the terminal
-    console.info(`${req.method} request received`);
+    console.log(`${req.method} request received`);
 
-    var {title, text} = req.body;
+    //adding field vairables to the body. 
+    // const {title, text} = req.body;
+    console.log(req.body);
+    const bodyNote = req.body;
+    let title = bodyNote.title;
+    let text = bodyNote.text;
 
     //create fields for the data base to fill in. UUID so if db has a unique identifier
-    if ( title && text) {
-        const newNote = {
-            title, 
-            text, 
-            id: uuid4()
-        }
-      // Prepare a response object to send back to the client
-        let responseNote = {
-            body: newNote,
-            status: 202,
-        }
-        console.log(responseNote);
-        res.status("Success")
-        fs.readFile('./db/db.json', (err, data) => {
+    if (bodyNote) {
+                let newNote = {
+                    title, 
+                    text,
+                    id: uuid4(),
+                }
+                // console.log(newNote);
+            // Prepare a response object to send back to the client
+                let response  = {
+                    status: "Success",
+                    body: newNote,
+                }
+        //success response. 
+        res.status(201).json("Success");
+
+        //reading the database file before pushing data.
+        fs.readFile('./db/db.json', function (err, data) {
+            const newArray = JSON.parse(data);
+            newArray.push(newNote);
             if (err) {
-                console.log('Error: New note post')
+                console.log('Error with passing new note to Database', err);
             } else {
-                console.log("success mama")
+                fs.writeFile('./db/db.json', JSON.stringify(newArray), err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Note changed");
+                    }
+                })
             }
         })
+    } else {
+        res.status(500).json("Error: New Note unsucessful");
     }
+    console.log(req.body);
 
 });
-
 
 app.listen(PORT, () =>
     console.log(`Example app listening at http://localhost:${PORT}`)
