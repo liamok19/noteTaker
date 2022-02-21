@@ -1,8 +1,6 @@
 const express = require('express');
 const path = require('path');
 
-const termData = require('./db/db.json');
-
 //create an epxress server
 const app = express();
 //create a port number for the server to run off of 
@@ -15,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 //holding CSS, JS and HTML files in a static middleware function in express.
 app.use(express.static('public'));
 
-app.get('/index', (req, res) =>
+app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, 'public/index.html'))
 );
 
@@ -65,9 +63,6 @@ app.post('/api/notes', (req, res) => {
 
 });
 
-app.get('/api/db', (req, res) => res.json(termData));
-
-app.get('/api/db:db', (req, res) => res.json(termData));
 
 app.listen(PORT, () =>
     console.log(`Example app listening at http://localhost:${PORT}`)
