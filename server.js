@@ -7,7 +7,7 @@ const {v4: uuid4} = require('uuid');
 //create an epxress server
 const app = express();
 //create a port number for the server to run off of 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Middleware for parsing application/json and urlencoded data
 app.use(express.json());
@@ -61,35 +61,37 @@ app.post('/api/notes', (req, res) => {
     console.log(`${req.method} request received`);
 
     //adding field vairables to the body. 
-    // const {title, text} = req.body;
-    console.log(req.body);
-    const bodyNote = req.body;
-    let title = bodyNote.title;
-    let text = bodyNote.text;
+    const {title, text} = req.body;
+    // console.log(req.body);
+    // const bodyNote = req.body;
+    // let title = bodyNote.title;
+    // let text = bodyNote.text;
 
     //create fields for the data base to fill in. UUID so if db has a unique identifier
-    if (bodyNote) {
-                let newNote = {
+    if (title && text) {
+                const newNote = {
                     title, 
                     text,
                     id: uuid4(),
                 }
                 // console.log(newNote);
             // Prepare a response object to send back to the client
-                let response  = {
-                    status: "Success",
-                    body: newNote,
-                }
+                // let response  = {
+                //     status: "Success",
+                //     body: newNote,
+                // }
         //success response. 
         res.status(201).json("Success");
 
         //reading the database file before pushing data.
         fs.readFile('./db/db.json', function (err, data) {
-            const newArray = JSON.parse(data);
-            newArray.push(newNote);
+
             if (err) {
                 console.log('Error with passing new note to Database', err);
             } else {
+                const newArray = JSON.parse(data);
+                newArray.push(newNote);
+                
                 fs.writeFile('./db/db.json', JSON.stringify(newArray), err => {
                     if (err) {
                         console.log(err);
