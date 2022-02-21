@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const termData = require('./db/db.json');
+const uuid4 = require('uuid');
 
 //create an epxress server
 const app = express();
@@ -24,26 +25,20 @@ app.get('/notes', (req, res) =>
 
 );
 
+//getting the data from db.json. running an if statement to return either a true of false value. 
+//Research for later. Can I make a ternary operator from the below if statment
+
 app.get('/api/notes', (req, res) => {
     fs.readFile('./db/db.json', (err, data) => {
+        // (err, data) ? err(console.log('Error with reading /api/notes')) : data(return res.json(JSON.parse(data));
         if (err) {
             console.log('Error with reading /api/notes');
         } else {
             return res.json(JSON.parse(data));
         }
-    console.log('dis success', fs.readFile);
+    // console.log('dis success', fs.readFile);
     })
 });
-
-// app.get("/api/notes", (req, res) => {
-//     fs.readFile("./Develop/db/db.json", (err, data) => {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             return res.json(JSON.parse(data));
-//         }
-//     })
-// })
 
 app.get('*', (req, res) => {
     res.send(
@@ -56,34 +51,46 @@ app.get('*', (req, res) => {
     console.info(`${req.method} request received`);
 
 });
-// app.post('/api/notes', (req, res) => {
-//     // Let the client know that their POST request was received
-//     // res.json(`${req.method} request received`);
 
-//     // Show the user agent information in the terminal
-//     console.info(req.rawHeaders);
+//Posting new note 
+app.post('/api/notes', (req, res) => {
+
+    // Show the user agent information in the terminal
+    console.info(req.rawHeaders);
     
-//     // // Log our request to the terminal
-//     // console.info(`${req.method} request received`);
+    // // Log request to the terminal
+    console.info(`${req.method} request received`);
 
-//       // Prepare a response object to send back to the client
-//         let response;
+    var {title, text} = req.body;
 
-//         // Check if there is anything in the response body
-//         if (req.body && req.body.product) {
-//             response = {
-//             status: 'success',
-//             data: req.body,
-//             };
-//             res.json(`Review for ${response.data.product} has been added!`);
-//         } else {
-//             res.json('Request body must at least contain a product name');
-//         }
+    //create fields for the data base to fill in. UUID so if db has a unique identifier
+    if ( title && text) {
+        const newNote = {
+            title, 
+            text, 
+            id: uuid4()
+        }
+      // Prepare a response object to send back to the client
+        let response = {
+            body: newNote,
+            status: 202,
+        }
+    }
+        // Check if there is anything in the response body
+        if (req.body && req.body.product) {
+            response = {
+            status: 'success',
+            data: req.body,
+            };
+            res.json(`Review for ${response.data.product} has been added!`);
+        } else {
+            res.json('Request body must at least contain a product name');
+        }
 
-//         // Log the response body to the console
-//         console.log(req.body);
+        // Log the response body to the console
+        console.log(req.body);
 
-// });
+});
 
 
 app.listen(PORT, () =>
