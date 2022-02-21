@@ -71,24 +71,20 @@ app.post('/api/notes', (req, res) => {
             id: uuid4()
         }
       // Prepare a response object to send back to the client
-        let response = {
+        let responseNote = {
             body: newNote,
             status: 202,
         }
+        console.log(responseNote);
+        res.status("Success")
+        fs.readFile('./db/db.json', (err, data) => {
+            if (err) {
+                console.log('Error: New note post')
+            } else {
+                console.log("success mama")
+            }
+        })
     }
-        // Check if there is anything in the response body
-        if (req.body && req.body.product) {
-            response = {
-            status: 'success',
-            data: req.body,
-            };
-            res.json(`Review for ${response.data.product} has been added!`);
-        } else {
-            res.json('Request body must at least contain a product name');
-        }
-
-        // Log the response body to the console
-        console.log(req.body);
 
 });
 
