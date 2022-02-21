@@ -104,14 +104,13 @@ app.post('/api/notes', (req, res) => {
 
 });
 
-app.delete("/api/notes/:id", function(req, res) {
-    if(req.query.portfolioId) {
-        console.log("Deleting portfolio: " + req.query.portfolioId);
-        stockService.deletePortfolio(req.query.portfolioId);
-        res.status(200).send({});
-    } else {
-        res.status(400).send("Please specify a portfolioId");
-    }
+app.delete("/api/notes/:id", function (req, res) {
+    let note = JSON.parse(fs.readFileSync('./db/db.json')); 
+    let delNote = note.filter(
+        (remove) => remove.id !== req.params.id);
+
+        fs.writeFileSync('./db/db.json', JSON.stringify(delNote));
+        res.json(delNote);
 });
 
 app.listen(PORT, () =>

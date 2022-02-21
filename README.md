@@ -31,22 +31,6 @@ Front end already supplied and credit goes to USYD team.
 | Clicking on the left hand side note column it presents the notes on the right | Completed | 
 | When clicking the "Write" icon it presents empty fields to enter a new note title/body in the right hand column | Completed | 
 
-## Directory Structure
-```md
-.
-├── __tests__/             //jest tests
-│   ├── Employee.test.js
-│   ├── Engineer.test.js
-│   ├── Intern.test.js
-│   └── Manager.test.js
-├── dist/                  // rendered output (HTML) and CSS style sheet      
-├── lib/                   // classes
-├── src/                   // template helper code 
-├── .gitignore             // indicates which folders and files Git should ignore
-├── index.js               // runs the application
-└── package.json           
-```
-
 ## Final Look
 # Usage
 <img src='./dist/images/liamO_team_profile_generator.gif' alt="liamO_noteTaker" >
@@ -58,8 +42,6 @@ This project is available under the MIT license. Visit [License: MIT](https://op
 To contribute to Team Profile Generator, clone this repo locally and commit your code on a separate branch.
 
 
-## Questions
-
-
+## Contact
 Git profile: https://github.com/liamok19
 Email: liamokane19@gmail.com
