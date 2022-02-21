@@ -1,5 +1,7 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
+const termData = require('./db/db.json');
 
 //create an epxress server
 const app = express();
@@ -19,11 +21,33 @@ app.get('/', (req, res) =>
 
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, 'public/notes.html'))
+
 );
+
+app.get('/api/notes', (req, res) => {
+    fs.readFile('./db/db.json', (err, data) => {
+        if (err) {
+            console.log('Error with reading /api/notes');
+        } else {
+            return res.json(JSON.parse(data));
+        }
+    console.log('dis success', fs.readFile);
+    })
+});
+
+// app.get("/api/notes", (req, res) => {
+//     fs.readFile("./Develop/db/db.json", (err, data) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             return res.json(JSON.parse(data));
+//         }
+//     })
+// })
 
 app.get('*', (req, res) => {
     res.send(
-    `Have another crack at the note taking <a href="http://localhost:${PORT}/index">http://localhost:${PORT}/index</a>`
+    `Have another crack at the note taking <a href="http://localhost:${PORT}/">http://localhost:${PORT}/</a>`
     );
       // Show the user agent information in the terminal
     console.info(req.rawHeaders);
@@ -32,8 +56,6 @@ app.get('*', (req, res) => {
     console.info(`${req.method} request received`);
 
 });
-
-
 // app.post('/api/notes', (req, res) => {
 //     // Let the client know that their POST request was received
 //     // res.json(`${req.method} request received`);
@@ -67,3 +89,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () =>
     console.log(`Example app listening at http://localhost:${PORT}`)
 );
+
