@@ -68,6 +68,7 @@ app.post('/api/notes', (req, res) => {
     // let text = bodyNote.text;
 
     //create fields for the data base to fill in. UUID so if db has a unique identifier
+    //throw err catch**** TO DO 
     if (title && text) {
                 const newNote = {
                     title, 
@@ -75,11 +76,6 @@ app.post('/api/notes', (req, res) => {
                     id: uuid4(),
                 }
                 // console.log(newNote);
-            // Prepare a response object to send back to the client
-                // let response  = {
-                //     status: "Success",
-                //     body: newNote,
-                // }
         //success response. 
         res.status(201).json("Success");
 
@@ -106,6 +102,16 @@ app.post('/api/notes', (req, res) => {
     }
     console.log(req.body);
 
+});
+
+app.delete("/api/notes/:id", function(req, res) {
+    if(req.query.portfolioId) {
+        console.log("Deleting portfolio: " + req.query.portfolioId);
+        stockService.deletePortfolio(req.query.portfolioId);
+        res.status(200).send({});
+    } else {
+        res.status(400).send("Please specify a portfolioId");
+    }
 });
 
 app.listen(PORT, () =>

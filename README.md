@@ -21,15 +21,15 @@ Front end already supplied and credit goes to USYD team.
 ## Strategy 
 | Steps | Instructions | 
 | ------------- |:-------------:| 
-| Installation Requirements | fontawesome, npm i inquirer and express require - INP  |
-| Applying relevant files to gitignore | INP |
-| Landing Page presents link to note page | INP | 
-| Notes App should present previous notes applied and room for new notes to be written | INP | 
-| Each note should have a title and body. | INP | 
-| Save icon shoulder appear when user begins typing a note | INP | 
-| Save icon should save the notes and appear in the left hand-column with other existing notes. | INP | 
-| Clicking on the left hand side note column it presents the notes on the right | INP | 
-| When clicking the "Write" icon it presents empty fields to enter a new note title/body in the right hand column | INP | 
+| Installation Requirements | fontawesome, npm i inquirer and express require - Completed  |
+| Applying relevant files to gitignore | Completed |
+| Landing Page presents link to note page | Completed | 
+| Notes App should present previous notes applied and room for new notes to be written | Completed | 
+| Each note should have a title and body. | Completed | 
+| Save icon shoulder appear when user begins typing a note | Completed | 
+| Save icon should save the notes and appear in the left hand-column with other existing notes. | Completed | 
+| Clicking on the left hand side note column it presents the notes on the right | Completed | 
+| When clicking the "Write" icon it presents empty fields to enter a new note title/body in the right hand column | Completed | 
 
 ## Directory Structure
 ```md
