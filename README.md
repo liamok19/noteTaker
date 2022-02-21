@@ -33,7 +33,7 @@ Front end already supplied and credit goes to USYD team.
 
 ## Final Look
 # Usage
-<img src='./dist/images/liamO_team_profile_generator.gif' alt="liamO_noteTaker" >
+<img src='./public/assets/images/noteTaker.gif' alt="liamO_noteTaker" >
 
 ## License
 This project is available under the MIT license. Visit [License: MIT](https://opensource.org/licenses/MIT) for full license text

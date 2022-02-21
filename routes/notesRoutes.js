@@ -1,25 +1,25 @@
-const fs = require ('fs');
+// const fs = require ('fs');
 
-const notesData = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
+// const notesData = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
 
-module.exports = function (app) {
+// module.exports = function (app) {
     
-    //APP get request. Reading the data from db.json file.
-    app.get('/api/notes', (req, res) => {
+//     //APP get request. Reading the data from db.json file.
+//     app.get('/api/notes', (req, res) => {
     
-        res.sendFile(path.join(__dirname, 'public/notes.html'))
+//         res.sendFile(path.join(__dirname, 'public/notes.html'))
 
-        // Show the user agent information in the terminal
-        console.info(req.rawHeaders);
+//         // Show the user agent information in the terminal
+//         console.info(req.rawHeaders);
 
-        // Prepare a response object to send back to the client
-        let notesDB = notesData;
+//         // Prepare a response object to send back to the client
+//         let notesDB = notesData;
 
-        console.log('\r\n GET request - Returning notes data: ' + JSON.stringify(notesDB));
+//         console.log('\r\n GET request - Returning notes data: ' + JSON.stringify(notesDB));
 
-        res.JSON = notesDB
+//         res.JSON = notesDB
         
-    });
+//     });
 
     // app.post('/api/notes', (req, res) => {
     //     // Let the client know that their POST request was received
@@ -45,6 +45,6 @@ module.exports = function (app) {
     //     // Log the response body to the console
     //     console.log(req.body);
 
-// });
+// // });
 
-};
+// };
